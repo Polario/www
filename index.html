@@ -3,33 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polario - AI Wingman</title>
+    <title>Polario - F-22 AI Wingman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="intro">
-        <div class="jet"></div>
-        <h1 class="logo">POLARIO</h1>
-        <p class="tagline">Your AI Wingman for Precision Insights</p>
+    <div class="cockpit">
+        <!-- HUD Overlay -->
+        <div class="hud-overlay">
+            <h1 class="callsign">POLARIO</h1>
+            <p class="status">AI Wingman: Locked and Loaded</p>
+        </div>
+
+        <!-- Radar Canvas -->
+        <canvas id="radar" class="radar-screen"></canvas>
+
+        <!-- Instrument Panels -->
+        <div class="instruments">
+            <div class="panel left-panel">
+                <h2>Target Acquisition</h2>
+                <div class="gauge" id="target-gauge"></div>
+                <p>Real-Time Tracking</p>
+            </div>
+            <div class="panel center-panel">
+                <h2>Mission Control</h2>
+                <div class="throttle">
+                    <input type="range" id="throttle" min="0" max="100" value="50">
+                    <span>AI Thrust: <span id="throttle-value">50%</span></span>
+                </div>
+                <p>Precision Analytics</p>
+            </div>
+            <div class="panel right-panel">
+                <h2>Strike Vector</h2>
+                <div class="vector-display">
+                    <span class="vector-data">Bearing: 270°</span>
+                    <span class="vector-data">Range: 150nm</span>
+                </div>
+                <p>Actionable Output</p>
+            </div>
+        </div>
+
+        <!-- Eject Button (CTA) -->
+        <button class="eject-btn">Engage Polario</button>
     </div>
-    <section class="hud">
-        <div class="feature left">
-            <h2>Track</h2>
-            <p>Real-time data acquisition</p>
-        </div>
-        <div class="feature center">
-            <h2>Analyze</h2>
-            <p>AI-driven insights</p>
-        </div>
-        <div class="feature right">
-            <h2>Strike</h2>
-            <p>Actionable results</p>
-        </div>
-    </section>
-    <div class="cta">
-        <button id="engage">Engage Now</button>
-    </div>
-    <canvas id="radar"></canvas>
     <script src="script.js"></script>
 </body>
 </html>
