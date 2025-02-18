@@ -1,30 +1,46 @@
-// Radar sweep effect on canvas
+// Radar Sweep
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 250;
+canvas.height = 250;
 
 let angle = 0;
 
 function drawRadar() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw radar circle
+
+    // Radar Circle
     ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 200, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(0, 212, 255, 0.2)';
+    ctx.arc(125, 125, 120, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(0, 255, 204, 0.3)';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Draw sweeping line
+    // Sweep Line
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height / 2);
-    const x = canvas.width / 2 + Math.cos(angle) * 200;
-    const y = canvas.height / 2 + Math.sin(angle) * 200;
+    ctx.moveTo(125, 125);
+    const x = 125 + Math.cos(angle) * 120;
+    const y = 125 + Math.sin(angle) * 120;
     ctx.lineTo(x, y);
-    ctx.strokeStyle = 'rgba(0, 212, 255, 0.5)';
-    ctx.lineWidth = 4;
+    ctx.strokeStyle = '#00ffcc';
+    ctx.lineWidth = 3;
     ctx.stroke();
+
+    // Blips (random targets)
+    for (let i = 0; i < 3; i++) {
+        const blipAngle = Math.random() * Math.PI * 2;
+        const blipDist = Math.random() * 100;
+        ctx.beginPath();
+        ctx.arc(
+            125 + Math.cos(blipAngle) * blipDist,
+            125 + Math.sin(blipAngle) * blipDist,
+            3,
+            0,
+            Math.PI * 2
+        );
+        ctx.fillStyle = '#ffcc00';
+        ctx.fill();
+    }
 
     angle += 0.05;
     if (angle > Math.PI * 2) angle = 0;
@@ -34,11 +50,10 @@ function drawRadar() {
 
 drawRadar();
 
-// Button hover effect
-const engageBtn = document.getElementById('engage');
-engageBtn.addEventListener('mouseover', () => {
-    engageBtn.style.background = '#00d4ff';
-});
-engageBtn.addEventListener('mouseout', () => {
-    engageBtn.style.background = '#ff9500';
+// Throttle Control
+const throttle = document.getElementById('throttle');
+const throttleValue = document.getElementById('throttle-value');
+
+throttle.addEventListener('input', () => {
+    throttleValue.textContent = `${throttle.value}%`;
 });
