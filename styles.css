@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #0a0e23;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards 2s;
+}
+
+.jet {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(90deg, #00d4ff, transparent);
+    border-radius: 50%;
+    top: -50px;
+    left: -200px;
+    animation: jetFly 1.5s ease forwards;
+}
+
+.logo {
+    font-size: 4em;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #00d4ff;
+    text-shadow: 0 0 10px #00d4ff;
+    margin: 0;
+}
+
+.tagline {
+    font-size: 1.2em;
+    color: #ff9500;
+    text-shadow: 0 0 5px #ff9500;
+    margin: 10px 0 0;
+}
+
+.hud {
+    position: absolute;
+    top: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0;
+    animation: slideUp 1s ease forwards 3s;
+}
+
+.feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border: 1px solid #00d4ff;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    transform: translateY(50px);
+}
+
+.feature h2 {
+    color: #00d4ff;
+    margin: 0;
+}
+
+.feature p {
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.cta {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 4s;
+}
+
+#engage {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    background: #ff9500;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #ff9500;
+    animation: pulse 2s infinite;
+}
+
+#radar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Animations */
+@keyframes jetFly {
+    0% { left: -200px; }
+    100% { left: 120%; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
