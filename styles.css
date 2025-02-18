@@ -2,128 +2,153 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: #0a0e23;
-    color: #fff;
+    background: #1a1a1a;
     font-family: 'Orbitron', sans-serif;
-}
-
-.intro {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 2s ease forwards 2s;
-}
-
-.jet {
-    position: absolute;
-    width: 100px;
-    height: 20px;
-    background: linear-gradient(90deg, #00d4ff, transparent);
-    border-radius: 50%;
-    top: -50px;
-    left: -200px;
-    animation: jetFly 1.5s ease forwards;
-}
-
-.logo {
-    font-size: 4em;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    color: #00d4ff;
-    text-shadow: 0 0 10px #00d4ff;
-    margin: 0;
-}
-
-.tagline {
-    font-size: 1.2em;
-    color: #ff9500;
-    text-shadow: 0 0 5px #ff9500;
-    margin: 10px 0 0;
-}
-
-.hud {
-    position: absolute;
-    top: 70%;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    opacity: 0;
-    animation: slideUp 1s ease forwards 3s;
-}
-
-.feature {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border: 1px solid #00d4ff;
-    border-radius: 5px;
-    width: 200px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-    transform: translateY(50px);
-}
-
-.feature h2 {
-    color: #00d4ff;
-    margin: 0;
-}
-
-.feature p {
     color: #fff;
-    font-size: 0.9em;
 }
 
-.cta {
+.cockpit {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, #0d0d0d, #2a2a2a);
+    overflow: hidden;
+}
+
+/* HUD Overlay */
+.hud-overlay {
     position: absolute;
-    bottom: 50px;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    opacity: 0;
-    animation: fadeIn 1s ease forwards 4s;
+    text-align: center;
+    text-shadow: 0 0 10px #00ffcc;
 }
 
-#engage {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    text-transform: uppercase;
-    background: #ff9500;
+.callsign {
+    font-size: 4rem;
+    color: #00ffcc;
+    letter-spacing: 8px;
+    animation: flicker 3s infinite;
+}
+
+.status {
+    font-size: 1.2rem;
+    color: #ffcc00;
+    margin-top: 10px;
+}
+
+/* Radar Screen */
+.radar-screen {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 250px;
+    height: 250px;
+    border: 2px solid #00ffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+}
+
+/* Instrument Panels */
+.instruments {
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.panel {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ffcc;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+    animation: panelGlow 2s infinite alternate;
+}
+
+.panel h2 {
+    color: #00ffcc;
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+}
+
+.gauge {
+    width: 100px;
+    height: 100px;
+    background: conic-gradient(#00ffcc 0% 75%, #333 75% 100%);
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: gaugeSpin 4s infinite linear;
+}
+
+.throttle {
+    margin: 20px 0;
+}
+
+.throttle input {
+    width: 100%;
+    accent-color: #ffcc00;
+}
+
+.throttle span {
+    color: #ffcc00;
+    font-size: 1.1rem;
+}
+
+.vector-display {
+    margin: 20px 0;
+}
+
+.vector-data {
+    display: block;
+    color: #00ffcc;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px #00ffcc;
+}
+
+/* Eject Button */
+.eject-btn {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    background: #ff3333;
     border: none;
     color: #fff;
+    text-transform: uppercase;
     cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 15px #ff9500;
-    animation: pulse 2s infinite;
+    box-shadow: 0 0 20px #ff3333;
+    animation: ejectPulse 1.5s infinite;
 }
 
-#radar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+.eject-btn:hover {
+    background: #ff6666;
 }
 
 /* Animations */
-@keyframes jetFly {
-    0% { left: -200px; }
-    100% { left: 120%; }
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
 }
 
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+@keyframes panelGlow {
+    0% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.3); }
+    100% { box-shadow: 0 0 25px rgba(0, 255, 204, 0.7); }
 }
 
-@keyframes slideUp {
-    0% { opacity: 0; transform: translateY(50px); }
-    100% { opacity: 1; transform: translateY(0); }
+@keyframes gaugeSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+@keyframes ejectPulse {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+    100% { transform: translateX(-50%) scale(1); }
 }
