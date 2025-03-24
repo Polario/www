@@ -1,5 +1,6 @@
 import React, { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
 
 interface PolarVisualizationProps {
@@ -8,21 +9,17 @@ interface PolarVisualizationProps {
 
 export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
   const cockpitRef = useRef<THREE.Group>(null);
-
-  // Create refs for elements
-  const pilotRef = useRef<THREE.Mesh>(null);
-  const controlRingRef = useRef<THREE.Mesh>(null);
+  const planeRef = useRef<THREE.Group>(null);
   const elementsRef = useRef<THREE.Points>(null);
 
-  // Animation loop
+  const planeModel = useLoader(GLTFLoader, '/models/fighter_plane.glb');
+
   useFrame((_, delta) => {
     if (cockpitRef.current) cockpitRef.current.rotation.y += delta * 0.05;
-    if (pilotRef.current) pilotRef.current.rotation.y += delta * 0.1;
-    if (controlRingRef.current) controlRingRef.current.rotation.z += delta * 0.1;
+    if (planeRef.current) planeRef.current.rotation.y += delta * 0.1;
     if (elementsRef.current) elementsRef.current.rotation.y -= delta * 0.02;
   });
 
-  // Elements representing company assets
   const elements = useMemo(() => {
     const positions = new Float32Array(1500);
     for (let i = 0; i < 1500; i += 3) {
@@ -38,17 +35,10 @@ export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
 
   return (
     <group ref={cockpitRef}>
-      {/* Fighter Pilot Seat (Central Sphere) */}
-      <mesh ref={pilotRef}>
-        <sphereGeometry args={[0.8, 64, 64]} />
-        <meshStandardMaterial color="#1d4ed8" roughness={0.2} metalness={0.9} />
-      </mesh>
-
-      {/* Control Ring (Cockpit Instruments) */}
-      <mesh ref={controlRingRef} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.8, 0.05, 32, 128]} />
-        <meshStandardMaterial color="#22c55e" emissive="#22c55e" emissiveIntensity={0.5} />
-      </mesh>
+      {/* Fighter Plane Model */}
+      <group ref={planeRef} scale={0.5}>
+        <primitive object={planeModel.scene} />
+      </group>
 
       {/* Company Elements Overview */}
       <points ref={elementsRef}>
