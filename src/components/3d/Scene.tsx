@@ -1,29 +1,20 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { Suspense } from 'react';
-import PolarVisualization from './PolarVisualization';
+import { PolarVisualization } from './PolarVisualization';
 
-const Scene: React.FC = () => {
+export const Scene: React.FC = () => {
   return (
     <Canvas
-      camera={{ position: [0, 0, 8], fov: 45 }}
-      style={{ background: '#000000' }}
+      camera={{ position: [0, 0, 5], fov: 75 }}
+      style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}
     >
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
       <Suspense fallback={null}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
         <PolarVisualization />
-        <OrbitControls
-          enableZoom={true}
-          enablePan={true}
-          enableRotate={true}
-          minDistance={5}
-          maxDistance={15}
-        />
       </Suspense>
+      <OrbitControls enableZoom={false} />
     </Canvas>
   );
-};
-
-export default Scene; 
+}; 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Scene from './components/3d/Scene';
+import { Scene } from './components/3d/Scene';
 import { Navigation } from './components/layout/Navigation';
 import { Section } from './components/layout/Section';
 import LoadingScreen from './components/ui/LoadingScreen';
