@@ -41,6 +41,11 @@ const sections = [
     text: 'Enhancing the MCP ecosystem with business-oriented solutions and standardized data access'
   },
   {
+    id: 'io',
+    title: 'Input/Output Mastery',
+    text: 'Transforming data into action: POLARIO\'s specialized IO capabilities in the MCP ecosystem'
+  },
+  {
     id: 'contact',
     title: 'Get Started',
     text: 'Transform your business with POLARIO\'s precision-driven approach to operational intelligence'
