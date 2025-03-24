@@ -7,26 +7,26 @@ interface PolarVisualizationProps {
 }
 
 export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
-  const groupRef = useRef<THREE.Group>(null);
+  const cockpitRef = useRef<THREE.Group>(null);
 
   // Create refs for elements
-  const sphereRef = useRef<THREE.Mesh>(null);
-  const ringRef = useRef<THREE.Mesh>(null);
-  const particlesRef = useRef<THREE.Points>(null);
+  const pilotRef = useRef<THREE.Mesh>(null);
+  const controlRingRef = useRef<THREE.Mesh>(null);
+  const elementsRef = useRef<THREE.Points>(null);
 
   // Animation loop
   useFrame((_, delta) => {
-    if (groupRef.current) groupRef.current.rotation.y += delta * 0.2;
-    if (sphereRef.current) sphereRef.current.rotation.y += delta * 0.4;
-    if (ringRef.current) ringRef.current.rotation.z += delta * 0.3;
-    if (particlesRef.current) particlesRef.current.rotation.y -= delta * 0.1;
+    if (cockpitRef.current) cockpitRef.current.rotation.y += delta * 0.05;
+    if (pilotRef.current) pilotRef.current.rotation.y += delta * 0.1;
+    if (controlRingRef.current) controlRingRef.current.rotation.z += delta * 0.1;
+    if (elementsRef.current) elementsRef.current.rotation.y -= delta * 0.02;
   });
 
-  // Particle system
-  const particles = useMemo(() => {
-    const positions = new Float32Array(3000);
-    for (let i = 0; i < 3000; i += 3) {
-      const distance = THREE.MathUtils.randFloat(2.5, 5);
+  // Elements representing company assets
+  const elements = useMemo(() => {
+    const positions = new Float32Array(1500);
+    for (let i = 0; i < 1500; i += 3) {
+      const distance = THREE.MathUtils.randFloat(3, 6);
       const theta = THREE.MathUtils.randFloatSpread(360);
       const phi = THREE.MathUtils.randFloatSpread(360);
       positions[i] = distance * Math.sin(theta) * Math.cos(phi);
@@ -37,28 +37,28 @@ export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
   }, []);
 
   return (
-    <group ref={groupRef}>
-      {/* Central Sphere */}
-      <mesh ref={sphereRef}>
-        <sphereGeometry args={[1, 64, 64]} />
-        <meshStandardMaterial color="#0ea5e9" roughness={0.4} metalness={0.7} />
+    <group ref={cockpitRef}>
+      {/* Fighter Pilot Seat (Central Sphere) */}
+      <mesh ref={pilotRef}>
+        <sphereGeometry args={[0.8, 64, 64]} />
+        <meshStandardMaterial color="#1d4ed8" roughness={0.2} metalness={0.9} />
       </mesh>
 
-      {/* Orbiting Ring */}
-      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2, 0.03, 16, 100]} />
-        <meshStandardMaterial color="#f97316" emissive="#f97316" emissiveIntensity={0.6} />
+      {/* Control Ring (Cockpit Instruments) */}
+      <mesh ref={controlRingRef} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.8, 0.05, 32, 128]} />
+        <meshStandardMaterial color="#22c55e" emissive="#22c55e" emissiveIntensity={0.5} />
       </mesh>
 
-      {/* Particle Field */}
-      <points ref={particlesRef}>
+      {/* Company Elements Overview */}
+      <points ref={elementsRef}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[particles, 3]} />
+          <bufferAttribute attach="attributes-position" args={[elements, 3]} />
         </bufferGeometry>
-        <pointsMaterial size={0.03} color="#ffffff" transparent opacity={0.8} />
+        <pointsMaterial size={0.04} color="#ffffff" transparent opacity={0.7} />
       </points>
 
-      {/* Connection Line */}
+      {/* Connection Lines (Representing control links) */}
       <line>
         <bufferGeometry
           attach="geometry"
@@ -66,12 +66,12 @@ export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
             position: new THREE.BufferAttribute(new Float32Array([0, 0, 0, 2, 0, 0]), 3),
           }}
         />
-        <lineBasicMaterial attach="material" color="#f97316" />
+        <lineBasicMaterial attach="material" color="#22c55e" />
       </line>
 
-      {/* Ambient Lighting */}
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
+      {/* Realistic Lighting */}
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 10]} intensity={1.2} color="#ffffff" />
     </group>
   );
 };
