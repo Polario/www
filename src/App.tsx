@@ -1,60 +1,64 @@
 import React from 'react';
+import styled from 'styled-components';
 import Scene from './components/3d/Scene';
 import { Navigation } from './components/layout/Navigation';
 import { Section } from './components/layout/Section';
 import LoadingScreen from './components/ui/LoadingScreen';
-import styled from 'styled-components';
+import { ThemeProvider } from './styles/ThemeProvider';
 import './styles/global.css';
 
 const AppContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: #000;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
+  position: relative;
+  background-color: ${({ theme }) => theme.colors.background.default};
+  color: ${({ theme }) => theme.colors.neutral.white};
+  overflow-x: hidden;
 `;
 
-const Content = styled.div`
+const Content = styled.main`
   position: relative;
-  z-index: 2;
+  z-index: 1;
   width: 100%;
-  height: 100vh;
-  overflow-x: hidden;
+  min-height: 100vh;
 `;
 
 const sections = [
   {
     id: 'home',
     title: 'POLARIO',
-    subtitle: 'Operational Intelligence for the Digital Age',
-    text: 'Empowering businesses with actionable intelligence through the POLAR framework and MCP integration'
+    subtitle: 'Transforming Business Through Innovation',
+    text: 'Welcome to POLARIO, where we revolutionize business operations through cutting-edge technology and sustainable practices.'
   },
   {
     id: 'about',
     title: 'The POLAR Framework',
-    text: 'A structured approach to operational intelligence: People, Objects, Locations, Actions, and Risks (IO)'
+    subtitle: 'Our Unique Approach',
+    text: 'The POLAR Framework is our proprietary methodology that combines Process Optimization, Lean principles, Agile methodologies, and Robust systems to deliver exceptional results.'
   },
   {
     id: 'services',
     title: 'MCP Integration',
-    text: 'Enhancing the MCP ecosystem with business-oriented solutions and standardized data access'
+    subtitle: 'Seamless Business Solutions',
+    text: 'Our MCP (Management Control Platform) integration services help businesses streamline operations, enhance efficiency, and drive sustainable growth.'
   },
   {
     id: 'contact',
     title: 'Get Started',
-    text: 'Transform your business with POLARIO\'s precision-driven approach to operational intelligence'
+    subtitle: 'Transform Your Business',
+    text: 'Ready to revolutionize your business? Contact us today to learn how POLARIO can help you achieve your goals.'
   }
 ];
 
 const App: React.FC = () => {
   return (
-    <AppContainer>
-      <LoadingScreen />
-      <Scene />
-      <Content>
+    <ThemeProvider>
+      <AppContainer>
+        <LoadingScreen />
+        <Scene />
         <Navigation />
-        <main>
-          {sections.map(section => (
+        <Content>
+          {sections.map((section) => (
             <Section
               key={section.id}
               id={section.id}
@@ -63,9 +67,9 @@ const App: React.FC = () => {
               text={section.text}
             />
           ))}
-        </main>
-      </Content>
-    </AppContainer>
+        </Content>
+      </AppContainer>
+    </ThemeProvider>
   );
 };
 

@@ -1,11 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
 :root {
+  /* Colors */
+  --color-primary: #00A3FF;
+  --color-primary-light: #33B5FF;
+  --color-primary-dark: #0072B3;
+  --color-secondary: #FF6B00;
+  --color-secondary-light: #FF8A33;
+  --color-secondary-dark: #B34A00;
+  
+  /* Neutral colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #EEEEEE;
+  --color-gray-300: #E0E0E0;
+  --color-gray-400: #BDBDBD;
+  --color-gray-500: #9E9E9E;
+  --color-gray-600: #757575;
+  --color-gray-700: #616161;
+  --color-gray-800: #424242;
+  --color-gray-900: #212121;
+  
+  /* Status colors */
+  --color-success: #4CAF50;
+  --color-warning: #FFC107;
+  --color-error: #F44336;
+  --color-info: #2196F3;
+  
+  /* Background colors */
   --color-background: #000000;
-  --color-text: #ffffff;
-  --color-primary: #4ecdc4;
-  --color-secondary: #ff6b6b;
-  --font-family: 'Inter', sans-serif;
+  --color-background-paper: #121212;
+  --color-background-overlay: rgba(0, 0, 0, 0.7);
+  
+  /* Typography */
+  --font-family-primary: 'Inter', sans-serif;
+  --font-family-secondary: 'Roboto', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
 }
 
 * {
@@ -14,30 +58,73 @@
   box-sizing: border-box;
 }
 
-html, body {
-  background: var(--color-background);
-  color: var(--color-text);
-  font-family: var(--font-family);
-  height: 100%;
-  width: 100%;
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background-color: var(--color-background);
+  color: var(--color-white);
+  line-height: 1.5;
   overflow-x: hidden;
 }
 
-#root {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-secondary);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
 }
 
 a {
-  color: inherit;
+  color: var(--color-primary);
   text-decoration: none;
+  transition: color var(--transition-fast) ease;
+}
+
+a:hover {
+  color: var(--color-primary-light);
 }
 
 button {
   cursor: pointer;
   border: none;
   background: none;
-  font-family: inherit;
-  color: inherit;
+  font-family: var(--font-family-primary);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Utility classes */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
 } 
