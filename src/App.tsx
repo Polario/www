@@ -27,26 +27,23 @@ const sections = [
   {
     id: 'home',
     title: 'POLARIO',
-    subtitle: 'Transforming Business Through Innovation',
-    text: 'Welcome to POLARIO, where we revolutionize business operations through cutting-edge technology and sustainable practices.'
+    subtitle: 'Operational Intelligence for the Digital Age',
+    text: 'Empowering businesses with actionable intelligence through the POLAR framework and MCP integration'
   },
   {
     id: 'about',
     title: 'The POLAR Framework',
-    subtitle: 'Our Unique Approach',
-    text: 'The POLAR Framework is our proprietary methodology that combines Process Optimization, Lean principles, Agile methodologies, and Robust systems to deliver exceptional results.'
+    text: 'A structured approach to operational intelligence: People, Objects, Locations, Actions, and Risks (IO)'
   },
   {
     id: 'services',
     title: 'MCP Integration',
-    subtitle: 'Seamless Business Solutions',
-    text: 'Our MCP (Management Control Platform) integration services help businesses streamline operations, enhance efficiency, and drive sustainable growth.'
+    text: 'Enhancing the MCP ecosystem with business-oriented solutions and standardized data access'
   },
   {
     id: 'contact',
     title: 'Get Started',
-    subtitle: 'Transform Your Business',
-    text: 'Ready to revolutionize your business? Contact us today to learn how POLARIO can help you achieve your goals.'
+    text: 'Transform your business with POLARIO\'s precision-driven approach to operational intelligence'
   }
 ];
 
