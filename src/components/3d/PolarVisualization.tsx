@@ -15,7 +15,7 @@ export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
   const particlesRef = useRef<THREE.Points>(null);
 
   // Animation loop
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (groupRef.current) groupRef.current.rotation.y += delta * 0.2;
     if (sphereRef.current) sphereRef.current.rotation.y += delta * 0.4;
     if (ringRef.current) ringRef.current.rotation.z += delta * 0.3;
@@ -53,7 +53,7 @@ export const PolarVisualization: React.FC<PolarVisualizationProps> = () => {
       {/* Particle Field */}
       <points ref={particlesRef}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes.position" array={particles} count={particles.length / 3} itemSize={3} />
+          <bufferAttribute attach="attributes-position" args={[particles, 3]} />
         </bufferGeometry>
         <pointsMaterial size={0.03} color="#ffffff" transparent opacity={0.8} />
       </points>
